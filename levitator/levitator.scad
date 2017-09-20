@@ -3,7 +3,12 @@ magnet_h=10;
 magnet_d=10;
 
 screw=3; // M3 screw
-screw_plastic=1.8; // plastic hole dia
+screw_plastic=2.2; // plastic hole dia
+screw_plastic_inside=screw_plastic*0.8; // tight
+screw_plastic_loose=screw_plastic*1.2;
+screw_plastic_head=screw_plastic*2;
+screw_plastic_head_transition=1; // cone for easier printing
+screw_plastic_under=2; // not counting transition
 
 clr_magnet_d=0.5; // diameter clearance
 clr_screw_hole=0.5; // hole bit bigger
@@ -58,7 +63,7 @@ module side_holder()
     for(i=[-2*steps:2*steps])
     translate([i*screw_step,0,0])
         rotate([0,0,0])
-          cylinder(d=screw_plastic+clr_screw_hole,h=cube_h*2,center=true);
+          cylinder(d=screw_plastic_inside+clr_screw_hole,h=cube_h*2,center=true);
     // hole for threaded rod
     rotate([90,0,0])
       rotate([0,0,90])
@@ -108,9 +113,17 @@ module magnet_holder(upper=0,lower=1)
     rotate([90,0,0])
       rotate([0,0,90])
       cylinder(d=screw+clr_screw_hole,h=holder_depth+0.01,$fn=6,center=true);
-    // screw head hole
+    // screw plastic thread hole thru all
     translate([holder_width/2-magnet_step/2,0,0])
-        cylinder(d=1.8,h=100,center=true);
+        cylinder(d=screw_plastic_inside,h=holder_height+0.1,center=true);
+    // screw head
+    translate([holder_width/2-magnet_step/2,0,-holder_height/1+magnet_height-screw_plastic_under])
+        cylinder(d=screw_plastic_head,h=holder_height+0.1,$fn=16,center=true);
+    // screw pass thru hole
+    translate([holder_width/2-magnet_step/2,0,-holder_height/2+magnet_height-screw_plastic_under/2])
+        cylinder(d=screw_plastic_loose,h=screw_plastic_under+0.1,$fn=16,center=true);
+    // conical transition
+
   }
 }
 
