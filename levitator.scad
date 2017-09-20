@@ -142,7 +142,7 @@ magnet_tube();
 
 //magnet_tube();
 //side_holder();
-magnet_holder(upper=0,lower=1);
+magnet_holder(upper=1,lower=1);
 
 // cross section
 if(0)
