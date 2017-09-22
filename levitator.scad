@@ -52,7 +52,7 @@ tail_transition=2;
 holder_bar_h=4;
 
 // stopper
-stop_d=magnet_d-clr_magnet_d;
+stop_d=magnet_d-2*clr_magnet_d; // small d
 stop_h=1.5;
 
 module magnet()
@@ -308,6 +308,14 @@ module full_assembly()
     translate([0,0,tube_len/2])
       head();
 
+    translate([0,-20,50])
+      rotate([-90,0,0])
+      magnet_holder(upper=0,lower=1);
+
+    translate([0,-20,-50])
+      rotate([-90,0,0])
+      magnet_holder(upper=0,lower=1);
+
 }
 
 if(0)
@@ -323,8 +331,8 @@ head();
 //translate([0,0,-90])
 if(0)
 tail();
-//side_holder();
-//magnet_holder(upper=1,lower=1);
+if(0)
+magnet_holder(upper=1,lower=1);
 if(0)
 magnet();
 
@@ -333,7 +341,7 @@ magnet();
 
 // cross section
 if(1)
-//    translate([0,0,55])
+    // translate([0,0,55])
 difference()
 {
     // magnet_holder();
