@@ -135,20 +135,61 @@ module magnet_holder(upper=1,lower=1)
   }
 }
 
+module head()
+{
+  inner_d=magnet_d+clr_magnet_d;
+  outer_d=inner_d+tube_wall;
+  head_len=25;
+  inlet_h=5;
+  inlet_clr=0.2; // inlet clearance
+  head_transition=0.5; // easier printing
+  tiph=4; // from tip to cutoff inside cone
+
+  union()
+  {
+  difference()
+  {
+    cylinder(d1=outer_d,d2=0,h=head_len,  $fn=cylinder_faces,center=true);
+    // cut out inside
+      //head_angle=asin(outer_d/2/head_len);
+      //movez=tube_wall/tan(head_angle);
+    translate([0,0,-tiph/2])
+      cylinder(d1=inner_d-inlet_clr-tube_wall,d2=0,h=head_len-tiph+0.01,$fn=cylinder_faces,center=true);
+  }
+    // inlet, magnet diameter
+      translate([0,0,-head_len/2-inlet_h/2])
+      difference()
+      {
+        union()
+        {
+        cylinder(d=inner_d-inlet_clr,h=inlet_h,$fn=cylinder_faces,center=true);
+          translate([0,0,inlet_h/2-head_transition/2])
+            cylinder(d2=outer_d,d1=inner_d-inlet_clr,h=head_transition,$fn=cylinder_faces,center=true);
+
+        }
+        // cut inside
+        cylinder(d=inner_d-inlet_clr-tube_wall,h=inlet_h+0.01,$fn=cylinder_faces,center=true);
+      }
+  }  
+}
+
 if(0)
 translate([0,0,15])
 rotate([90,0,0])
 magnet_tube();
 
-//magnet_tube();
+// magnet_tube();
+head();
 //side_holder();
-magnet_holder(upper=1,lower=1);
+//magnet_holder(upper=1,lower=1);
 
 // cross section
 if(0)
 difference()
 {
-magnet_holder();
+    // magnet_holder();
+    head();
     translate([0,50,0])
     cube([100,100,100],center=true);
 }
+
