@@ -48,6 +48,7 @@ wing_h1=10; // straignt part of the wing
 wing_h2=25; // total wing height
 wing_width=10;
 wing_thick=tube_wall/2; // thickness
+tail_transition=2;
 
 module magnet_tube()
 {
@@ -190,6 +191,29 @@ module tail()
   inner_d=magnet_d+clr_magnet_d;
   outer_d=inner_d+tube_wall;
 
+  // inside part
+    // inlet, magnet diameter
+      translate([0,0,inlet_h/2-tail_transition*0.5])
+      difference()
+      {
+        union()
+        {
+        cylinder(d=inner_d-inlet_clr,h=inlet_h+tail_transition,$fn=cylinder_faces,center=true);
+          if(0)
+          translate([0,0,-inlet_h/2-tail_transition/2])
+            cylinder(d1=outer_d,d2=inner_d-inlet_clr,h=tail_transition,$fn=cylinder_faces,center=true);
+        }
+        // cut inside
+        cylinder(d=inner_d-inlet_clr-tube_wall,h=inlet_h+tail_transition+0.01,$fn=cylinder_faces,center=true);
+        // cut transition
+          translate([0,0,-inlet_h/2-tail_transition*0])
+            cylinder(d2=inner_d-inlet_clr-tube_wall,d1=inner_d-inlet_clr,h=tail_transition,$fn=cylinder_faces,center=true);
+
+      }
+
+
+  // outside part with wings
+  translate([0,0,-wing_h2/2])
   difference()
   {
     union()
@@ -213,8 +237,8 @@ module tail()
       cylinder(d1=50,d2=0,h=50,$fn=4,center=true);
     }
   }
-    
-    cylinder(d=outer_d-tube_wall,h=wing_h2+0.01,$fn=cylinder_faces,center=true);
+    // central hole 
+    cylinder(d=outer_d-tube_wall-inlet_clr,h=wing_h2+0.01,$fn=cylinder_faces,center=true);
   }
 }
 
@@ -228,17 +252,18 @@ magnet_tube();
 translate([0,0,90])
 if(0)
 head();
-translate([0,0,-90])
-tail();
+//translate([0,0,-90])
+//tail();
 //side_holder();
 //magnet_holder(upper=1,lower=1);
 
 // cross section
-if(0)
+if(1)
 difference()
 {
     // magnet_holder();
-    head();
+    // head();
+    tail();
     translate([0,50,0])
     cube([100,100,100],center=true);
 }
