@@ -33,6 +33,22 @@ magnet_step=5;
 magnet_height=holder_height/2;
 holder_clearance=0.3;
 
+// head
+
+head_len=25;
+inlet_h=5;
+inlet_clr=0.2; // inlet clearance
+head_transition=0.5; // easier printing
+tiph=4; // from tip to cutoff inside cone
+
+// tail
+
+wings=4;
+wing_h1=10; // straignt part of the wing
+wing_h2=25; // total wing height
+wing_width=10;
+wing_thick=tube_wall/2; // thickness
+
 module magnet_tube()
 {
   inner_d=magnet_d+clr_magnet_d;
@@ -139,11 +155,7 @@ module head()
 {
   inner_d=magnet_d+clr_magnet_d;
   outer_d=inner_d+tube_wall;
-  head_len=25;
-  inlet_h=5;
-  inlet_clr=0.2; // inlet clearance
-  head_transition=0.5; // easier printing
-  tiph=4; // from tip to cutoff inside cone
+
 
   union()
   {
@@ -173,13 +185,51 @@ module head()
   }  
 }
 
+module tail()
+{
+  inner_d=magnet_d+clr_magnet_d;
+  outer_d=inner_d+tube_wall;
+
+  difference()
+  {
+    union()
+    {
+      // main cylinder
+      // rotate for 4-wing to match on flat side
+      rotate([0,0,180/cylinder_faces])
+      cylinder(d=outer_d,h=wing_h2,$fn=cylinder_faces,center=true);
+    // wings (stabilizers)
+    angle=360/wings;
+    intersection()
+    {
+    for(i=[0:wings-1])
+    {
+      rotate([0,0,angle*i])
+        translate([outer_d/2-wing_thick/2+wing_width/2,0,0])
+        cube([wing_width+wing_thick,wing_thick,  wing_h2],center=true);
+    }
+      // enclosing cone
+      // todo: trigonometry here
+      cylinder(d1=50,d2=0,h=50,$fn=4,center=true);
+    }
+  }
+    
+    cylinder(d=outer_d-tube_wall,h=wing_h2+0.01,$fn=cylinder_faces,center=true);
+  }
+}
+
 if(0)
 translate([0,0,15])
 rotate([90,0,0])
 magnet_tube();
 
-// magnet_tube();
+if(0)
+magnet_tube();
+translate([0,0,90])
+if(0)
 head();
+translate([0,0,-90])
+tail();
 //side_holder();
 //magnet_holder(upper=1,lower=1);
 
