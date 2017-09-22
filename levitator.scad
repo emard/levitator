@@ -17,7 +17,7 @@ clr_screw_hole=0.5; // hole bit bigger
 clr_screw_step=1; // screw spacing clearance
 
 tube_wall=1.5; // wall thickness
-tube_len=150; // tube length
+tube_len=140; // tube length
 
 
 screw_step=magnet_h+screw+clr_screw_step;
@@ -49,24 +49,65 @@ wing_h2=25; // total wing height
 wing_width=10;
 wing_thick=tube_wall/2; // thickness
 tail_transition=2;
+holder_bar_h=4;
 
-module magnet_tube()
+// stopper
+stop_d=magnet_d-clr_magnet_d;
+stop_h=1.5;
+
+module magnet()
+{
+  color([0.5,0.5,1]) // blue, north
+  translate([0,0,magnet_h/4])
+    cylinder(d=magnet_d,h=magnet_h/2,$fn=cylinder_faces,center=true);
+  color([1,0.5,0.5]) // red, south
+  translate([0,0,-magnet_h/4])
+    cylinder(d=magnet_d,h=magnet_h/2,$fn=cylinder_faces,center=true);
+}
+
+module stopper()
+{
+  inner_d=magnet_d+clr_magnet_d;
+  
+  difference()
+  {
+    cylinder(d=inner_d+0.01,h=stop_h,$fn=cylinder_faces,center=true);
+    translate([0,0,-stop_h/4])
+      cylinder(d2=stop_d,d1=inner_d,h=stop_h/2+0.01,$fn=cylinder_faces,center=true);
+    translate([0,0,stop_h/4])
+      cylinder(d1=stop_d,d2=inner_d,h=stop_h/2+0.01,$fn=cylinder_faces,center=true);
+
+  }
+}
+
+module magnet_tube(holes=0,stoppers=1)
 {
   inner_d=magnet_d+clr_magnet_d;
   outer_d=inner_d+tube_wall;
   steps=floor(tube_len/screw_step/2)*2;
+  union()
+  {
   difference()
   {
     cylinder(d=outer_d,h=tube_len,$fn=cylinder_faces,center=true);
     // tube = inside empty
     cylinder(d=inner_d,h=tube_len+0.01,$fn=cylinder_faces,center=true);
     // adjustment holes
+    if(holes>0.5)
     for(i=[-2*steps:2*steps])
       translate([0,0,i*screw_step])
         rotate([90,0,0])
           rotate([0,0,90])
           cylinder(d=screw+clr_screw_hole,h=outer_d*2,$fn=6,center=true);
-        
+  }
+    if(stoppers>0.5)
+    {
+      stop_z=tube_len/2-clr_magnet_h-inlet_h-magnet_h;
+      translate([0,0,stop_z])
+        stopper();
+      translate([0,0,-stop_z])
+        stopper();
+    }
   }
 }
 
@@ -158,6 +199,7 @@ module head()
   outer_d=inner_d+tube_wall;
 
 
+  translate([0,0,head_len/2])
   union()
   {
   difference()
@@ -240,6 +282,32 @@ module tail()
     // central hole 
     cylinder(d=outer_d-tube_wall-inlet_clr,h=wing_h2+0.01,$fn=cylinder_faces,center=true);
   }
+  // anchorage bar
+  translate([0,0,-wing_h2+holder_bar_h/2])
+    union()
+    {
+        for(i=[0:1])
+        rotate([0,0,90*i])
+    cube([outer_d-tube_wall/2,wing_thick,holder_bar_h],center=true);
+    }
+}
+
+module full_assembly()
+{
+    magnet_tube();
+    // magnet head
+    translate([0,0,tube_len/2-magnet_h/2-inlet_h-clr_magnet_h/2])
+      magnet();
+    // magnet tail
+    translate([0,0,-tube_len/2+magnet_h/2+inlet_h+clr_magnet_h/2])
+      magnet();
+    // tail
+    translate([0,0,-tube_len/2])
+      tail();
+    // head
+    translate([0,0,tube_len/2])
+      head();
+
 }
 
 if(0)
@@ -253,18 +321,26 @@ translate([0,0,90])
 if(0)
 head();
 //translate([0,0,-90])
-//tail();
+if(0)
+tail();
 //side_holder();
 //magnet_holder(upper=1,lower=1);
+if(0)
+magnet();
+
+// stopper();
+// full_assembly();
 
 // cross section
 if(1)
+//    translate([0,0,55])
 difference()
 {
     // magnet_holder();
     // head();
-    tail();
-    translate([0,50,0])
-    cube([100,100,100],center=true);
+    // tail();
+    full_assembly();
+    translate([0,100,0])
+    cube([200,200,200],center=true);
 }
 
