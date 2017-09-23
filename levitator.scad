@@ -12,12 +12,12 @@ screw_plastic_transition=1.5; // cone for easier printing
 screw_plastic_under=3; // not counting transition
 
 clr_magnet_d=0.5; // diameter clearance
-clr_magnet_h=0.5; // length clearance
+clr_magnet_h=0.3; // length clearance
 clr_screw_hole=0.5; // hole bit bigger
 clr_screw_step=1; // screw spacing clearance
 
 tube_wall=1.5; // wall thickness
-tube_len=140; // tube length
+tube_len=120; // tube length
 
 
 screw_step=magnet_h+screw+clr_screw_step;
@@ -35,14 +35,16 @@ holder_clearance=0.3;
 
 // head
 
-head_len=25;
+head_len=15;
 inlet_h=5;
-inlet_clr=0.2; // inlet clearance
+head_inlet_clr=0.1; // head inlet clearance
 head_transition=0.5; // easier printing
-tiph=4; // from tip to cutoff inside cone
+tiph=-2; // from tip to cutoff inside cone
+head_tip=4; // tip diameter
 
 // tail
 
+inlet_clr=0.2; // inlet clearance
 wings=4;
 wing_h1=10; // straignt part of the wing
 wing_h2=25; // total wing height
@@ -204,12 +206,18 @@ module head()
   {
   difference()
   {
-    cylinder(d1=outer_d,d2=0,h=head_len,  $fn=cylinder_faces,center=true);
+    union()
+    {
+    cylinder(d1=outer_d,d2=head_tip,h=head_len,  $fn=cylinder_faces,center=true);
+        // sphere at the tip
+        translate([0,0,head_len/2])
+        sphere(d=head_tip,$fn=cylinder_faces);
+    }
     // cut out inside
       //head_angle=asin(outer_d/2/head_len);
       //movez=tube_wall/tan(head_angle);
     translate([0,0,-tiph/2])
-      cylinder(d1=inner_d-inlet_clr-tube_wall,d2=0,h=head_len-tiph+0.01,$fn=cylinder_faces,center=true);
+      cylinder(d1=inner_d-head_inlet_clr-tube_wall,d2=0,h=head_len-tiph+0.01,$fn=cylinder_faces,center=true);
   }
     // inlet, magnet diameter
       translate([0,0,-head_len/2-inlet_h/2])
@@ -217,13 +225,13 @@ module head()
       {
         union()
         {
-        cylinder(d=inner_d-inlet_clr,h=inlet_h,$fn=cylinder_faces,center=true);
+        cylinder(d=inner_d-head_inlet_clr,h=inlet_h,$fn=cylinder_faces,center=true);
           translate([0,0,inlet_h/2-head_transition/2])
-            cylinder(d2=outer_d,d1=inner_d-inlet_clr,h=head_transition,$fn=cylinder_faces,center=true);
+            cylinder(d2=outer_d,d1=inner_d-head_inlet_clr,h=head_transition,$fn=cylinder_faces,center=true);
 
         }
         // cut inside
-        cylinder(d=inner_d-inlet_clr-tube_wall,h=inlet_h+0.01,$fn=cylinder_faces,center=true);
+        cylinder(d=inner_d-head_inlet_clr-tube_wall,h=inlet_h+0.01,$fn=cylinder_faces,center=true);
       }
   }  
 }
@@ -308,36 +316,27 @@ module full_assembly()
     translate([0,0,tube_len/2])
       head();
 
-    translate([0,-20,50])
+    translate([0,-20,tube_len/2-inlet_h-magnet_h])
       rotate([-90,0,0])
       magnet_holder(upper=0,lower=1);
 
-    translate([0,-20,-50])
+    translate([0,-20,-tube_len/2+inlet_h+magnet_h])
       rotate([-90,0,0])
       magnet_holder(upper=0,lower=1);
 
 }
 
 if(0)
-translate([0,0,15])
-rotate([90,0,0])
-magnet_tube();
-
+  magnet_tube();
 if(0)
-magnet_tube();
-translate([0,0,90])
-if(0)
-head();
+  head();
 //translate([0,0,-90])
 if(0)
-tail();
+  tail();
 if(0)
-magnet_holder(upper=1,lower=1);
+  magnet_holder(upper=1,lower=1);
 if(0)
-magnet();
-
-// stopper();
-// full_assembly();
+  magnet();
 
 // cross section
 if(1)
