@@ -382,11 +382,11 @@ if(0)
   magnet_holder(upper=1,lower=1);
 if(0)
   magnet();
-if(1)
+if(0)
   moon();
 
 // cross section
-if(0)
+if(1)
     // translate([0,0,55])
 difference()
 {
