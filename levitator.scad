@@ -57,6 +57,45 @@ holder_bar_h=4;
 stop_d=magnet_d-2*clr_magnet_d; // small d
 stop_h=1.5;
 
+levitation_h=37;
+
+// moon artwork
+moon_d1=80;
+moon_d2=80;
+moon_crescent=10;
+moon_thick=8;
+moon_angle=45;
+
+module moon()
+{
+  difference()
+  {
+  rotate([0,0,moon_angle])
+  difference()
+  {
+     cylinder(d=moon_d1,h=moon_thick,$fn=96,center=true);
+     translate([moon_crescent,0,0])
+       cylinder(d=moon_d2,h=moon_thick+0.01,$fn=96,center=true); 
+  }
+    // hole for thread
+    translate([0,-moon_d1/2+levitation_h,0])
+      rotate([90,0,90])
+      cylinder(d=screw_plastic_tight,h=moon_d1*2,$fn=16,center=true);
+  
+    // hole for thread
+    translate([0,-moon_d1/2+levitation_h,0])
+      rotate([90,0,90])
+      cylinder(d=2,h=moon_d1*2,$fn=16,center=true);
+
+    // hole for threaded rod
+    translate([0,-moon_d1/2+magnet_height,0])
+      rotate([90,0,90])
+      cylinder(d=screw+clr_screw_hole,h=moon_d1*2,$fn=16,center=true);
+
+
+  }
+}
+
 module magnet()
 {
   color([0.5,0.5,1]) // blue, north
@@ -302,6 +341,8 @@ module tail()
 
 module full_assembly()
 {
+  union()
+  {
     magnet_tube();
     // magnet head
     translate([0,0,tube_len/2-magnet_h/2-inlet_h-clr_magnet_h/2])
@@ -316,14 +357,18 @@ module full_assembly()
     translate([0,0,tube_len/2])
       head();
 
-    translate([0,-20,tube_len/2-inlet_h-magnet_h])
+    translate([0,holder_height/2-levitation_h,tube_len/2-inlet_h-magnet_h])
       rotate([-90,0,0])
       magnet_holder(upper=0,lower=1);
 
-    translate([0,-20,-tube_len/2+inlet_h+magnet_h])
+    translate([0,holder_height/2-levitation_h,-tube_len/2+inlet_h+magnet_h])
       rotate([-90,0,0])
       magnet_holder(upper=0,lower=1);
-
+    
+    translate([0,moon_d1/2-levitation_h,-90])
+    rotate([0,-90,0])
+    moon();
+  }
 }
 
 if(0)
@@ -337,9 +382,11 @@ if(0)
   magnet_holder(upper=1,lower=1);
 if(0)
   magnet();
+if(1)
+  moon();
 
 // cross section
-if(1)
+if(0)
     // translate([0,0,55])
 difference()
 {
@@ -347,6 +394,7 @@ difference()
     // head();
     // tail();
     full_assembly();
+    if(0)
     translate([0,100,0])
     cube([200,200,200],center=true);
 }
