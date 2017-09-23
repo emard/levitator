@@ -13,7 +13,7 @@ screw_plastic_under=3; // not counting transition
 
 clr_magnet_d=0.5; // diameter clearance
 clr_magnet_h=0.2; // length clearance
-clr_screw_hole=0.4; // hole bit bigger
+clr_screw_hole=0.2; // hole bit bigger
 clr_screw_step=1; // screw spacing clearance
 
 tube_wall=1.5; // wall thickness
@@ -44,7 +44,7 @@ head_tip=4; // tip diameter
 
 // tail
 
-inlet_clr=0.2; // inlet clearance
+inlet_clr=0.15; // inlet clearance
 wings=4;
 wing_h1=10; // straignt part of the wing
 wing_h2=25; // total wing height
@@ -381,7 +381,7 @@ if(0)
 if(0)
   tail();
 if(0)
-  magnet_holder(upper=1,lower=1);
+  magnet_holder(upper=1,lower=0);
 if(0)
   magnet();
 if(0)
