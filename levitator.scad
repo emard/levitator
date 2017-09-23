@@ -61,10 +61,10 @@ levitation_h=37;
 
 // moon artwork
 moon_d1=80;
-moon_d2=80;
+moon_d2=78;
 moon_crescent=10;
 moon_thick=8;
-moon_angle=45;
+moon_angle=30;
 
 module moon()
 {
