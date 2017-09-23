@@ -12,12 +12,12 @@ screw_plastic_transition=1.5; // cone for easier printing
 screw_plastic_under=3; // not counting transition
 
 clr_magnet_d=0.5; // diameter clearance
-clr_magnet_h=0.3; // length clearance
-clr_screw_hole=0.5; // hole bit bigger
+clr_magnet_h=0.2; // length clearance
+clr_screw_hole=0.4; // hole bit bigger
 clr_screw_step=1; // screw spacing clearance
 
 tube_wall=1.5; // wall thickness
-tube_len=120; // tube length
+tube_len=100; // tube length (120 works)
 
 
 screw_step=magnet_h+screw+clr_screw_step;
@@ -64,7 +64,7 @@ moon_d1=80;
 moon_d2=78;
 moon_crescent=10;
 moon_thick=8;
-moon_angle=30;
+moon_angle=9;
 
 module moon()
 {
@@ -90,7 +90,8 @@ module moon()
     // hole for threaded rod
     translate([0,-moon_d1/2+magnet_height,0])
       rotate([90,0,90])
-      cylinder(d=screw+clr_screw_hole,h=moon_d1*2,$fn=16,center=true);
+      rotate([0,0,90])
+      cylinder(d=screw+clr_screw_hole,h=moon_d1*2,$fn=6,center=true);
 
 
   }
@@ -341,6 +342,7 @@ module tail()
 
 module full_assembly()
 {
+  rotate([90,0,0])
   union()
   {
     magnet_tube();
@@ -359,11 +361,11 @@ module full_assembly()
 
     translate([0,holder_height/2-levitation_h,tube_len/2-inlet_h-magnet_h])
       rotate([-90,0,0])
-      magnet_holder(upper=0,lower=1);
+      magnet_holder(upper=1,lower=1);
 
     translate([0,holder_height/2-levitation_h,-tube_len/2+inlet_h+magnet_h])
       rotate([-90,0,0])
-      magnet_holder(upper=0,lower=1);
+      magnet_holder(upper=1,lower=1);
     
     translate([0,moon_d1/2-levitation_h,-90])
     rotate([0,-90,0])
@@ -394,8 +396,8 @@ difference()
     // head();
     // tail();
     full_assembly();
-    if(0)
-    translate([0,100,0])
-    cube([200,200,200],center=true);
+    if(1)
+    translate([200,0,0])
+    cube([400,400,400],center=true);
 }
 
