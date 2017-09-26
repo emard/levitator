@@ -233,6 +233,19 @@ module magnet_holder(upper=1,lower=1)
         cylinder(d1=screw_plastic_head,d2=screw_plastic_loose,h=screw_plastic_transition+0.1,$fn=16,center=true);
     }
   }
+
+  {
+    // magnets placed in adjustment hole
+    if(magnet > 0)
+    for(i=[-1:2:1])
+    translate([i*magnet_step*(magnet+1),0,-holder_height/2+magnet_height])
+        rotate([90,0,0])
+          magnet();
+          // cylinder(d=magnet_d+
+        //clr_magnet_d,h=magnet_h+clr_magnet_h,$fn=32,center=true);
+
+  }
+
 }
 
 module head()
@@ -361,11 +374,11 @@ module full_assembly()
 
     translate([0,holder_height/2-levitation_h,tube_len/2-inlet_h-magnet_h])
       rotate([-90,0,0])
-      magnet_holder(upper=1,lower=1);
+      magnet_holder(upper=0,lower=1,magnet=4);
 
-    translate([0,holder_height/2-levitation_h,-tube_len/2+inlet_h+magnet_h])
+    translate([0,holder_height/2-levitation_h,-tube_len/2+inlet_h+magnet_h/2])
       rotate([-90,0,0])
-      magnet_holder(upper=1,lower=1);
+      magnet_holder(upper=0,lower=1,magnet=3);
     
     translate([0,moon_d1/2-levitation_h,-90])
     rotate([0,-90,0])
@@ -397,7 +410,7 @@ difference()
     // tail();
     full_assembly();
     if(1)
-    translate([200,0,0])
-    cube([400,400,400],center=true);
+    translate([100,0,0])
+    cube([200,100,50],center=true);
 }
 
