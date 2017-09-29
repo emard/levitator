@@ -122,7 +122,7 @@ module stopper()
   }
 }
 
-module magnet_tube(holes=0,stoppers=1)
+module rocket_tube(holes=0,stoppers=1)
 {
   inner_d=magnet_d+clr_magnet_d;
   outer_d=inner_d+tube_wall;
@@ -322,9 +322,7 @@ module tail()
         // cut transition
           translate([0,0,-inlet_h/2-tail_transition*0])
             cylinder(d2=inner_d-inlet_clr-tube_wall,d1=inner_d-inlet_clr,h=tail_transition,$fn=cylinder_faces,center=true);
-
       }
-
 
   // outside part with wings
   translate([0,0,-wing_h2/2])
@@ -347,11 +345,8 @@ module tail()
         cube([wing_width+wing_thick,wing_thick,  wing_h2],center=true);
     }
       // enclosing cone
-      // todo: trigonometry here
-      // cylinder(r1=25,r2=0,h=50,$fn=4,center=true);
       translate([0,0,h/2-wing_h2/2])
-          cylinder(r1=r,r2=0,h=h,$fn=4,center=true);
-
+          cylinder(r1=r,r2=0,h=h,$fn=wings,center=true);
     }
   }
     // central hole 
@@ -372,7 +367,7 @@ module full_assembly()
   rotate([90,0,0])
   union()
   {
-    magnet_tube();
+    rocket_tube();
     // magnet head
     translate([0,0,tube_len/2-magnet_h/2-inlet_h-clr_magnet_h/2])
       magnet();
@@ -401,16 +396,13 @@ module full_assembly()
 }
 
 if(0)
-  magnet_tube();
-if(0)
   head();
-//translate([0,0,-90])
+if(0)
+  rocket_tube();
 if(0)
   tail();
 if(0)
   magnet_holder(upper=1,lower=0);
-if(0)
-  magnet();
 if(0)
   moon();
 
