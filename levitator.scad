@@ -346,7 +346,7 @@ module tail()
     }
       // enclosing cone
       translate([0,0,h/2-wing_h2/2])
-          cylinder(r1=r,r2=0,h=h,$fn=wings,center=true);
+          cylinder(r1=r,r2=0,h=h,$fn=wings < 3 ? 4 : wings,center=true);
     }
   }
     // central hole 
