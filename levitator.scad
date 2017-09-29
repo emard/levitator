@@ -5,7 +5,7 @@ magnet_d=10;
 screw=3; // M3 screw
 screw_plastic=2.2; // plastic hole dia
 screw_plastic_tight=screw_plastic*0.82; // tight
-echo(screw_plastic_tight);
+// echo(screw_plastic_tight);
 screw_plastic_loose=screw_plastic*1.1;
 screw_plastic_head=screw_plastic*2.2;
 screw_plastic_transition=1.5; // cone for easier printing
@@ -46,7 +46,7 @@ head_tip=4; // tip diameter
 
 inlet_clr=0.15; // inlet clearance
 wings=4;
-wing_h1=10; // straignt part of the wing
+wing_h1=7; // straignt height of the wing
 wing_h2=25; // total wing height
 wing_width=10;
 wing_thick=tube_wall/2; // thickness
@@ -293,6 +293,17 @@ module tail()
 {
   inner_d=magnet_d+clr_magnet_d;
   outer_d=inner_d+tube_wall;
+    
+  // calculate enclosing cone
+  // for the wings
+  h1=wing_h1; // outer h
+  h2=wing_h2; // inner h
+  r1=outer_d/2+wing_width; // outer r 
+  r2=outer_d/2; // inner r
+  // determine eclosing cone r, h
+  r=(h1*r2-h2*r1)/(h1-h2);
+  h=r*h1/(r-r1);
+  echo(r,h);
 
   // inside part
     // inlet, magnet diameter
@@ -337,7 +348,10 @@ module tail()
     }
       // enclosing cone
       // todo: trigonometry here
-      cylinder(d1=50,d2=0,h=50,$fn=4,center=true);
+      // cylinder(r1=25,r2=0,h=50,$fn=4,center=true);
+      translate([0,0,h/2-wing_h2/2])
+          cylinder(r1=r,r2=0,h=h,$fn=4,center=true);
+
     }
   }
     // central hole 
