@@ -1,7 +1,7 @@
 # Magnetic Levitation Toy
 
 Object that horizonally levitates, artwork inspired
-by rockets the Moon.
+by flying a rocket to the Moon and back.
 
 Magnets compensate vertical component of gravity.
 A small horizontal force component still remains. 
