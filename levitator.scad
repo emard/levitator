@@ -173,7 +173,7 @@ module side_holder()
   }
 }
 
-module magnet_holder(upper=1,lower=1)
+module magnet_holder(upper=1,lower=1,magnet=0)
 {
   difference()
   {
