@@ -1,71 +1,4 @@
 
-magnet_h=10;
-magnet_d=10;
-
-screw=3; // M3 screw
-screw_plastic=2.2; // plastic hole dia
-screw_plastic_tight=screw_plastic*0.82; // tight
-// echo(screw_plastic_tight);
-screw_plastic_loose=screw_plastic*1.1;
-screw_plastic_head=screw_plastic*2.2;
-screw_plastic_transition=1.5; // cone for easier printing
-screw_plastic_under=3; // not counting transition
-
-clr_magnet_d=0.5; // diameter clearance
-clr_magnet_h=0.2; // length clearance
-clr_screw_hole=0.2; // hole bit bigger
-clr_screw_step=1; // screw spacing clearance
-
-tube_wall=1.5; // wall thickness
-tube_len=100; // tube length (120 works)
-
-
-screw_step=magnet_h+screw+clr_screw_step;
-
-// screw_step=2*screw;
-
-cylinder_faces=32;
-
-holder_depth=15;
-holder_width=72;
-holder_height=14;
-magnet_step=5;
-magnet_height=holder_height/2;
-holder_clearance=0.3;
-
-// head
-
-head_len=15;
-inlet_h=5;
-head_inlet_clr=0.1; // head inlet clearance
-head_transition=0.5; // easier printing
-tiph=-2; // from tip to cutoff inside cone
-head_tip=4; // tip diameter
-
-// tail
-
-inlet_clr=0.15; // inlet clearance
-wings=4;
-wing_h1=7; // straignt height of the wing
-wing_h2=25; // total wing height
-wing_width=10;
-wing_thick=tube_wall/2; // thickness
-tail_transition=2;
-holder_bar_h=4;
-
-// stopper
-stop_d=magnet_d-2*clr_magnet_d; // small d
-stop_h=1.5;
-
-levitation_h=37;
-
-// moon artwork
-moon_d1=80;
-moon_d2=78;
-moon_crescent=10;
-moon_thick=8;
-moon_angle=9;
-
 module moon()
 {
   difference()
@@ -153,28 +86,10 @@ module rocket_tube(holes=0,stoppers=1)
   }
 }
 
-module side_holder()
-{
-  cube_len=54;
-  cube_h=15;
-  steps=floor(cube_len/screw_step/2)*2;
-  difference()
-  {
-    cube([cube_len,cube_h,cube_h],center=true);
-    // adjustment holes
-    for(i=[-2*steps:2*steps])
-    translate([i*screw_step,0,0])
-        rotate([0,0,0])
-          cylinder(d=screw_plastic_tight+clr_screw_hole,h=cube_h*2,center=true);
-    // hole for threaded rod
-    rotate([90,0,0])
-      rotate([0,0,90])
-      cylinder(d=screw+clr_screw_hole,h=cube_h*2,$fn=6,center=true);
-  }
-}
-
 module magnet_holder(upper=1,lower=1,magnet=0)
 {
+  // number of magnet placeholders
+  steps=floor(holder_width/magnet_step/2)*2-4;
   difference()
   {
     cube([holder_width,holder_depth,holder_height],center=true);
@@ -201,8 +116,6 @@ module magnet_holder(upper=1,lower=1,magnet=0)
             holder_depth+0.01,
             holder_height],
       center=true);
-    // magnet placeholders
-    steps=floor(holder_width/magnet_step/2)*2-4;
     // magnet adjustment holes
     for(i=[-steps/2:steps/2])
         if(i < -1.5 || i > 1.5)
@@ -238,7 +151,7 @@ module magnet_holder(upper=1,lower=1,magnet=0)
     // magnets placed in adjustment hole
     if(magnet > 0)
     for(i=[-1:2:1])
-    translate([i*magnet_step*(magnet+1),0,-holder_height/2+magnet_height])
+    translate([i*magnet_step*(steps/2-magnet+1),0,-holder_height/2+magnet_height])
         rotate([90,0,0])
           magnet();
           // cylinder(d=magnet_d+
@@ -383,40 +296,15 @@ module full_assembly()
 
     translate([0,holder_height/2-levitation_h,tube_len/2-inlet_h-magnet_h])
       rotate([-90,0,0])
-      magnet_holder(upper=0,lower=1,magnet=4);
+      magnet_holder(upper=0,lower=1,magnet=1);
 
     translate([0,holder_height/2-levitation_h,-tube_len/2+inlet_h+magnet_h/2])
       rotate([-90,0,0])
-      magnet_holder(upper=0,lower=1,magnet=3);
+      magnet_holder(upper=0,lower=1,magnet=2);
     
     translate([0,moon_d1/2-levitation_h,-90])
     rotate([0,-90,0])
     moon();
   }
-}
-
-if(0)
-  head();
-if(0)
-  rocket_tube();
-if(0)
-  tail();
-if(0)
-  magnet_holder(upper=1,lower=0);
-if(0)
-  moon();
-
-// cross section
-if(1)
-    // translate([0,0,55])
-difference()
-{
-    // magnet_holder();
-    // head();
-    // tail();
-    full_assembly();
-    if(1)
-    translate([100,0,0])
-    cube([200,100,50],center=true);
 }
 
