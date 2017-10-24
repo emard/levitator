@@ -1,5 +1,7 @@
 include <levitator.scad>
 
+// layer height: 0.2 mm
+
 magnet_h=10;
 magnet_d=6;
 
@@ -12,7 +14,7 @@ screw_plastic_head=screw_plastic*2.2;
 screw_plastic_transition=1.5; // cone for easier printing
 screw_plastic_under=3; // not counting transition
 
-clr_magnet_d=0.5; // diameter clearance
+clr_magnet_d=0.3; // diameter clearance
 clr_magnet_h=0.2; // length clearance
 clr_screw_hole=0.2; // hole bit bigger
 clr_screw_step=1; // screw spacing clearance
@@ -37,13 +39,13 @@ holder_clearance=0.3;
 // head
 head_len=12;
 inlet_h=4;
-head_inlet_clr=0.1; // head inlet clearance
+head_inlet_clr=0.05; // head inlet clearance
 head_transition=0.5; // easier printing
 tiph=-2; // from tip to cutoff inside cone
 head_tip=3; // tip diameter
 
 // tail
-inlet_clr=0.15; // inlet clearance
+tail_inlet_clr=0.0; // tail inlet clearance
 wings=4;
 wing_h1=4; // straignt height of the wing
 wing_h2=15; // total wing height
@@ -72,7 +74,8 @@ if(0)
 if(0)
   tail();
 if(0)
-  magnet_holder(upper=1,lower=0);
+  rotate([0*180,0,0])
+  magnet_holder(upper=0,lower=1);
 if(0)
   moon();
 

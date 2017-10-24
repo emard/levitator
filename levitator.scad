@@ -225,16 +225,16 @@ module tail()
       {
         union()
         {
-        cylinder(d=inner_d-inlet_clr,h=inlet_h+tail_transition,$fn=cylinder_faces,center=true);
+        cylinder(d=inner_d-tail_inlet_clr,h=inlet_h+tail_transition,$fn=cylinder_faces,center=true);
           if(0)
           translate([0,0,-inlet_h/2-tail_transition/2])
-            cylinder(d1=outer_d,d2=inner_d-inlet_clr,h=tail_transition,$fn=cylinder_faces,center=true);
+            cylinder(d1=outer_d,d2=inner_d-tail_inlet_clr,h=tail_transition,$fn=cylinder_faces,center=true);
         }
         // cut inside
-        cylinder(d=inner_d-inlet_clr-tube_wall,h=inlet_h+tail_transition+0.01,$fn=cylinder_faces,center=true);
+        cylinder(d=inner_d-tail_inlet_clr-tube_wall,h=inlet_h+tail_transition+0.01,$fn=cylinder_faces,center=true);
         // cut transition
           translate([0,0,-inlet_h/2-tail_transition*0])
-            cylinder(d2=inner_d-inlet_clr-tube_wall,d1=inner_d-inlet_clr,h=tail_transition,$fn=cylinder_faces,center=true);
+            cylinder(d2=inner_d-tail_inlet_clr-tube_wall,d1=inner_d-tail_inlet_clr,h=tail_transition,$fn=cylinder_faces,center=true);
       }
 
   // outside part with wings
@@ -263,7 +263,7 @@ module tail()
     }
   }
     // central hole 
-    cylinder(d=outer_d-tube_wall-inlet_clr,h=wing_h2+0.01,$fn=cylinder_faces,center=true);
+    cylinder(d=outer_d-tube_wall-tail_inlet_clr,h=wing_h2+0.01,$fn=cylinder_faces,center=true);
   }
   // anchorage bar
   translate([0,0,-wing_h2+holder_bar_h/2])
