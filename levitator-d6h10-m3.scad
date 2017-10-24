@@ -14,13 +14,13 @@ screw_plastic_head=screw_plastic*2.2;
 screw_plastic_transition=1.5; // cone for easier printing
 screw_plastic_under=3; // not counting transition
 
-clr_magnet_d=0.3; // diameter clearance
-clr_magnet_h=0.2; // length clearance
+clr_magnet_d=0.25; // diameter clearance
+clr_magnet_h=0.15; // length clearance
 clr_screw_hole=0.2; // hole bit bigger
 clr_screw_step=1; // screw spacing clearance
 
 tube_wall=1.5; // wall thickness
-tube_len=80; // tube length
+tube_len=70; // tube length
 
 
 screw_step=magnet_h+screw+clr_screw_step;
@@ -31,7 +31,7 @@ cylinder_faces=32;
 
 holder_depth=15;
 holder_width=60;
-holder_height=14;
+holder_height=8;
 magnet_step=5;
 magnet_height=holder_height/2;
 holder_clearance=0.3;
@@ -58,7 +58,7 @@ holder_bar_h=4;
 stop_d=magnet_d-2*clr_magnet_d; // small d
 stop_h=1.5;
 
-levitation_h=26;
+levitation_h=19;
 
 // moon artwork
 moon_d1=2*levitation_h;
