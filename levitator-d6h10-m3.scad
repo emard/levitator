@@ -64,7 +64,7 @@ levitation_h=20;
 // moon artwork
 moon_d1=2*levitation_h;
 moon_d2=moon_d1;
-moon_crescent=6;
+moon_crescent=moon_d1/10;
 moon_thick=7;
 moon_angle=9;
 
