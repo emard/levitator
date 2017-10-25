@@ -58,7 +58,7 @@ holder_bar_h=4;
 stop_d=magnet_d-2*clr_magnet_d; // small d
 stop_h=1.5;
 
-levitation_h=20;
+levitation_h=22;
 ;
 
 // moon artwork
@@ -66,7 +66,7 @@ moon_d1=2*levitation_h;
 moon_d2=moon_d1;
 moon_crescent=moon_d1/10;
 moon_thick=7;
-moon_angle=9;
+moon_angle=15;
 
 if(0)
   head();
