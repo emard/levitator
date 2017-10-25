@@ -30,7 +30,7 @@ screw_step=magnet_h+screw+clr_screw_step;
 cylinder_faces=32;
 
 holder_depth=15;
-holder_width=60;
+holder_width=50;
 holder_height=8;
 magnet_step=5;
 magnet_height=holder_height/2;
@@ -58,7 +58,8 @@ holder_bar_h=4;
 stop_d=magnet_d-2*clr_magnet_d; // small d
 stop_h=1.5;
 
-levitation_h=19;
+levitation_h=20;
+;
 
 // moon artwork
 moon_d1=2*levitation_h;
