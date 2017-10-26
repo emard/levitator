@@ -10,3 +10,4 @@ For stability it can be countered with a thread.
 3D printable parts and 6 cylindrical neodymium magnets 
 r=10 mm, h=10 mm.
 
+![Image](/pic/levitator.png)
