@@ -8,6 +8,6 @@ provide forward horizontal force (thrust) that is
 compensated with a thread (rocket is anchored to the Moon).
 
 3D printable parts and 6 cylindrical neodymium magnets 
-r=10 mm, h=10 mm.
+D=10 mm, L=10 mm.
 
 ![Image](/pic/levitator.png)
