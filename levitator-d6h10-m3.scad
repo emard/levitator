@@ -65,9 +65,9 @@ levitation_h=19;
 // moon artwork
 moon_d1=2*levitation_h;
 moon_d2=moon_d1;
-moon_crescent=6;
+moon_crescent=3;
 moon_thick=7;
-moon_angle=9;
+moon_angle=12;
 
 if(0)
   head();
@@ -75,13 +75,13 @@ if(0)
   rocket_tube();
 if(0)
   tail();
-if(1)
+if(0)
   printable_holders();
 if(0)
   moon();
 
 // cross section
-if(0)
+if(1)
     // translate([0,0,55])
 difference()
 {
