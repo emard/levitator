@@ -30,10 +30,12 @@ screw_step=magnet_h+screw+clr_screw_step;
 cylinder_faces=32;
 
 holder_depth=15;
-holder_width=50;
+// holder_width=60; // obsolete, calculated from magnet_last and screw size
 holder_height=8;
-magnet_step=5;
-magnet_height=holder_height/2;
+magnet_first=[16,14]; // head,tail
+magnet_last=[16,14]; // head,tail
+magnet_n=[1,1]; // head,tail
+magnet_height=holder_height/2; // in the middle of the holder
 holder_clearance=0.3;
 
 // head
@@ -58,15 +60,14 @@ holder_bar_h=4;
 stop_d=magnet_d-2*clr_magnet_d; // small d
 stop_h=1.5;
 
-levitation_h=22;
-;
+levitation_h=19;
 
 // moon artwork
 moon_d1=2*levitation_h;
 moon_d2=moon_d1;
-moon_crescent=moon_d1/10;
+moon_crescent=6;
 moon_thick=7;
-moon_angle=15;
+moon_angle=9;
 
 if(0)
   head();
@@ -74,14 +75,13 @@ if(0)
   rocket_tube();
 if(0)
   tail();
-if(0)
-  rotate([0*180,0,0])
-  magnet_holder(upper=0,lower=1);
+if(1)
+  printable_holders();
 if(0)
   moon();
 
 // cross section
-if(1)
+if(0)
     // translate([0,0,55])
 difference()
 {

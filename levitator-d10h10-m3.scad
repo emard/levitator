@@ -28,9 +28,12 @@ screw_step=magnet_h+screw+clr_screw_step;
 cylinder_faces=32;
 
 holder_depth=15;
-holder_width=72;
+// holder_width=72; // should be calculated from magnet_last and screw size
 holder_height=14;
-magnet_step=5;
+magnet_first=[20,25]; // tail,head
+magnet_last=[20,25]; // tail,head
+magnet_n=[1,1]; // tail,head
+// magnet_step=5; // obsolete
 magnet_height=holder_height/2;
 holder_clearance=0.3;
 
@@ -73,13 +76,13 @@ if(0)
   rocket_tube();
 if(0)
   tail();
-if(0)
-  magnet_holder(upper=1,lower=0);
+if(1)
+  printable_holders();
 if(0)
   moon();
 
 // cross section
-if(1)
+if(0)
     // translate([0,0,55])
 difference()
 {

@@ -86,10 +86,16 @@ module rocket_tube(holes=0,stoppers=1)
   }
 }
 
-module magnet_holder(upper=1,lower=1,magnet=0)
+// first: distance of closest magnet from center
+// last:  distance of farthest magnet from center
+// n: number of magnets
+// magnet: 0-disabled, >=1-place a magnet model for visualisation
+module magnet_holder(upper=1,lower=1,magnet=0,first=20,last=30,n=2)
 {
   // number of magnet placeholders
-  steps=floor(holder_width/magnet_step/2)*2-4;
+  // steps=floor(holder_width/magnet_step/2)*2-4;
+  magnet_step = n > 1.5 ? (last-first)/(n-1) : 0;
+  holder_width = 2*last+2*magnet_d+3*screw_plastic;
   difference()
   {
     cube([holder_width,holder_depth,holder_height],center=true);
@@ -117,11 +123,11 @@ module magnet_holder(upper=1,lower=1,magnet=0)
             holder_height],
       center=true);
     // magnet adjustment holes
-    for(i=[-steps/2:steps/2])
-        if(i < -1.5 || i > 1.5)
-    translate([i*magnet_step,0,-holder_height/2+magnet_height])
-        rotate([90,0,0])
-          cylinder(d=magnet_d+clr_magnet_d,h=magnet_h+clr_magnet_h,$fn=32,center=true);
+    for(i=[0:n-1])
+      for(j=[-1:2:1])
+        translate([j*(first+i*magnet_step),0,-holder_height/2+magnet_height])
+          rotate([90,0,0])
+            cylinder(d=magnet_d+clr_magnet_d,h=magnet_h+clr_magnet_h,$fn=32,center=true);
     // rod hole
     // hole for threaded rod
     translate([0,0,-holder_height/2+magnet_height])
@@ -150,13 +156,10 @@ module magnet_holder(upper=1,lower=1,magnet=0)
   {
     // magnets placed in adjustment hole
     if(magnet > 0)
-    for(i=[-1:2:1])
-    translate([i*magnet_step*(steps/2-magnet+1),0,-holder_height/2+magnet_height])
+      for(j=[-1:2:1])
+        translate([j*(last-(magnet-1)*magnet_step),0,-holder_height/2+magnet_height])
         rotate([90,0,0])
           magnet();
-          // cylinder(d=magnet_d+
-        //clr_magnet_d,h=magnet_h+clr_magnet_h,$fn=32,center=true);
-
   }
 
 }
@@ -295,12 +298,12 @@ module full_assembly()
       head();
 
     translate([0,holder_height/2-levitation_h,tube_len/2-inlet_h-magnet_h])
-      rotate([-90,0,0])
-      magnet_holder(upper=0,lower=1,magnet=1);
+      rotate([-90,0,0]) // magnet=1
+        magnet_holder(upper=0,lower=1,magnet=1,first=magnet_first[0],last=magnet_last[0],n=magnet_n[0]);
 
     translate([0,holder_height/2-levitation_h,-tube_len/2+inlet_h+magnet_h/2])
-      rotate([-90,0,0])
-      magnet_holder(upper=0,lower=1,magnet=2);
+      rotate([-90,0,0]) // magnet=2
+        magnet_holder(upper=0,lower=1,magnet=2,first=magnet_first[1],last=magnet_last[1],n=magnet_n[1]);
     
     translate([0,moon_d1/2-levitation_h,-90])
     rotate([0,-90,0])
@@ -308,3 +311,25 @@ module full_assembly()
   }
 }
 
+// lay 2 holders side-by-side for printing
+module printable_holders()
+{
+  rotate([90,0,0])
+  {
+    translate([0,0,-2.1*holder_depth])
+      rotate([-90,0,0])
+        magnet_holder(upper=0,lower=1,magnet=0,first=magnet_first[0],last=magnet_last[0],n=magnet_n[0]);
+
+    translate([0,0,-0.7*holder_depth])
+      rotate([90,0,0])
+        magnet_holder(upper=1,lower=0,magnet=0,first=magnet_first[0],last=magnet_last[0],n=magnet_n[0]);
+
+    translate([0,0, 0.7*holder_depth])
+      rotate([-90,0,0])
+        magnet_holder(upper=0,lower=1,magnet=0,first=magnet_first[1],last=magnet_last[1],n=magnet_n[1]);
+
+    translate([0,0, 2.1*holder_depth])
+      rotate([90,0,0])
+        magnet_holder(upper=1,lower=0,magnet=0,first=magnet_first[1],last=magnet_last[1],n=magnet_n[1]);
+  }
+}
