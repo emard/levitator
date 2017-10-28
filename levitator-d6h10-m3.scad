@@ -32,8 +32,8 @@ cylinder_faces=32;
 holder_depth=15;
 // holder_width=60; // obsolete, calculated from magnet_last and screw size
 holder_height=8;
-magnet_first=[16,14]; // head,tail
-magnet_last=[16,14]; // head,tail
+magnet_first=[16,12]; // head,tail
+magnet_last=magnet_first;
 magnet_n=[1,1]; // head,tail
 magnet_height=holder_height/2; // in the middle of the holder
 holder_clearance=0.3;
@@ -51,7 +51,7 @@ tail_inlet_clr=0.0; // tail inlet clearance
 wings=4;
 wing_h1=4; // straignt height of the wing
 wing_h2=15; // total wing height
-wing_width=6;
+wing_width=7;
 wing_thick=tube_wall/2; // thickness
 tail_transition=2;
 holder_bar_h=4;
@@ -60,13 +60,13 @@ holder_bar_h=4;
 stop_d=magnet_d-2*clr_magnet_d; // small d
 stop_h=1.5;
 
-levitation_h=19;
+levitation_h=27;
 
 // moon artwork
 moon_d1=2*levitation_h;
 moon_d2=moon_d1;
-moon_crescent=3;
-moon_thick=7;
+moon_crescent=5; // width of crescent moon
+moon_thick=7; // extrusion thickness
 moon_angle=12;
 
 if(0)
