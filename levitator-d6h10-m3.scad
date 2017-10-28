@@ -20,7 +20,7 @@ clr_screw_hole=0.2; // hole bit bigger
 clr_screw_step=1; // screw spacing clearance
 
 tube_wall=1.5; // wall thickness
-tube_len=70; // tube length
+tube_len=60; // tube length
 
 
 screw_step=magnet_h+screw+clr_screw_step;
