@@ -49,8 +49,8 @@ head_tip=3; // tip diameter
 // tail
 tail_inlet_clr=0.0; // tail inlet clearance
 wings=4;
-wing_h1=4; // straignt height of the wing
-wing_h2=15; // total wing height
+wing_h1=5; // straignt height of the wing
+wing_h2=16; // total wing height
 wing_width=7;
 wing_thick=tube_wall/2; // thickness
 tail_transition=2;
