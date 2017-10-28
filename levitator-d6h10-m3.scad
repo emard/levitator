@@ -6,6 +6,7 @@ magnet_h=10;
 magnet_d=6;
 
 screw=3; // M3 screw
+use_screws=0; // in plastic holders
 screw_plastic=2.2; // plastic hole dia
 screw_plastic_tight=screw_plastic*0.82; // tight
 // echo(screw_plastic_tight);

@@ -90,15 +90,28 @@ module rocket_tube(holes=0,stoppers=1)
 // last:  distance of farthest magnet from center
 // n: number of magnets
 // magnet: 0-disabled, >=1-place a magnet model for visualisation
+// screws: 0-disabled (uses threaded rod), 1-enabled (2 screws)
 module magnet_holder(upper=1,lower=1,magnet=0,first=20,last=30,n=2)
 {
   // number of magnet placeholders
   // steps=floor(holder_width/magnet_step/2)*2-4;
   magnet_step = n > 1.5 ? (last-first)/(n-1) : 0;
-  holder_width = 2*last+2*magnet_d+3*screw_plastic;
+  holder_width = use_screws > 0.5 ?
+    /* with screws */ 2*last+2*magnet_d+3*screw_plastic :
+    /* without screws (rectangular part) */ 2*last+0*magnet_d+0*(holder_height-magnet_d);
   difference()
   {
-    cube([holder_width,holder_depth,holder_height],center=true);
+    union()
+    {
+      cube([holder_width,holder_depth,holder_height],center=true);
+      // round corners
+      for(i=[-1:2:1])
+        translate([i*last,0,0])
+          rotate([90,0,0])
+            cylinder(d=holder_height,h=holder_depth,$fn=64,center=true);
+    }
+    if(use_screws > 0.5)
+    {
     // cut slit between
     translate([0,0,-holder_height/2+magnet_height])
       cube([
@@ -122,6 +135,33 @@ module magnet_holder(upper=1,lower=1,magnet=0,first=20,last=30,n=2)
             holder_depth+0.01,
             holder_height],
       center=true);
+    }
+    if(use_screws < 0.5)
+    {
+    // cut slit between
+    translate([0,0,-holder_height/2+magnet_height])
+      cube([
+            holder_width+holder_depth+0.01,
+            holder_clearance,
+            holder_height+0.01],
+      center=true);
+    // no upper side
+    if(upper<0.5)
+      translate([0,holder_depth/2,-holder_height/2+magnet_height])
+      cube([
+            holder_width+holder_depth+0.01,
+            holder_depth,
+            holder_height+0.01],
+      center=true);
+    // no lower side
+    if(lower<0.5)
+      translate([0,-holder_depth/2,-holder_height/2+magnet_height])
+      cube([
+            holder_width+holder_depth+0.01,
+            holder_depth,
+            holder_height+0.01],
+      center=true);
+    }
     // magnet adjustment holes
     for(i=[0:n-1])
       for(j=[-1:2:1])
@@ -136,6 +176,7 @@ module magnet_holder(upper=1,lower=1,magnet=0,first=20,last=30,n=2)
       cylinder(d=screw+clr_screw_hole,h=holder_depth+0.01,$fn=6,center=true);
     // screw holes left and right
         screw_x=(holder_width/2-screw_plastic_head*0.7);
+    if(use_screws > 0.5)
     for(i=[-1:2:1])
     {
     // screw plastic thread hole thru all
@@ -303,7 +344,7 @@ module full_assembly()
 
     translate([0,holder_height/2-levitation_h,-tube_len/2+inlet_h+magnet_h/2])
       rotate([-90,0,0]) // magnet=2
-        magnet_holder(upper=0,lower=1,magnet=2,first=magnet_first[1],last=magnet_last[1],n=magnet_n[1]);
+        magnet_holder(upper=1,lower=0,magnet=2,first=magnet_first[1],last=magnet_last[1],n=magnet_n[1]);
     
     translate([0,moon_d1/2-levitation_h,-90])
     rotate([0,-90,0])
@@ -314,6 +355,7 @@ module full_assembly()
 // lay 2 holders side-by-side for printing
 module printable_holders()
 {
+  if(use_screws > 0.5)
   rotate([90,0,0])
   {
     translate([0,0,-2.1*holder_depth])
@@ -330,6 +372,26 @@ module printable_holders()
 
     translate([0,0, 2.1*holder_depth])
       rotate([90,0,0])
+        magnet_holder(upper=1,lower=0,magnet=0,first=magnet_first[1],last=magnet_last[1],n=magnet_n[1]);
+  }
+
+  if(use_screws < 0.5)
+  rotate([0,0,0])
+  {
+    translate([0,-2.1*holder_height,0])
+      rotate([90,0,0])
+        magnet_holder(upper=0,lower=1,magnet=0,first=magnet_first[0],last=magnet_last[0],n=magnet_n[0]);
+
+    translate([0,-0.7*holder_height,0])
+      rotate([-90,0,0])
+        magnet_holder(upper=1,lower=0,magnet=0,first=magnet_first[0],last=magnet_last[0],n=magnet_n[0]);
+
+    translate([0, 0.7*holder_height,0])
+      rotate([90,0,0])
+        magnet_holder(upper=0,lower=1,magnet=0,first=magnet_first[1],last=magnet_last[1],n=magnet_n[1]);
+
+    translate([0, 2.1*holder_height,0])
+      rotate([-90,0,0])
         magnet_holder(upper=1,lower=0,magnet=0,first=magnet_first[1],last=magnet_last[1],n=magnet_n[1]);
   }
 }

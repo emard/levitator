@@ -4,6 +4,7 @@ magnet_h=10;
 magnet_d=10;
 
 screw=3; // M3 screw
+use_screws=0; // 0-disable screws, 1-enable screws
 screw_plastic=2.2; // plastic hole dia
 screw_plastic_tight=screw_plastic*0.82; // tight
 // echo(screw_plastic_tight);
@@ -76,13 +77,13 @@ if(0)
   rocket_tube();
 if(0)
   tail();
-if(1)
+if(0)
   printable_holders();
 if(0)
   moon();
 
 // cross section
-if(0)
+if(1)
     // translate([0,0,55])
 difference()
 {
