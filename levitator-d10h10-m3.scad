@@ -36,7 +36,7 @@ magnet_last=[20,25]; // tail,head
 magnet_n=[1,1]; // tail,head
 // magnet_step=5; // obsolete
 magnet_height=holder_height/2;
-holder_clearance=0.3;
+holder_clearance=use_screws > 0.5 ? 0.3 : 0;
 
 // head
 

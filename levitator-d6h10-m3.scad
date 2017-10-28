@@ -37,7 +37,7 @@ magnet_first=[16,12]; // head,tail
 magnet_last=magnet_first;
 magnet_n=[1,1]; // head,tail
 magnet_height=holder_height/2; // in the middle of the holder
-holder_clearance=0.3;
+holder_clearance=use_screws > 0.5 ? 0.3 : 0;
 
 // head
 head_len=12;
