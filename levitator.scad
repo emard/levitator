@@ -108,7 +108,7 @@ module magnet_holder(upper=1,lower=1,magnet=0,first=20,last=30,n=2)
       for(i=[-1:1:1])
         translate([i*last,0,0])
           rotate([90,0,0])
-            cylinder(d=holder_height,h=holder_depth,$fn=64,center=true);
+            cylinder(d=i < -0.1 || i > 0.1 ? holder_height : 0.85 * holder_height,h=holder_depth,$fn=64,center=true);
     }
     if(use_screws > 0.5)
     {
