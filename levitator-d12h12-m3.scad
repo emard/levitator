@@ -1,12 +1,10 @@
 include <levitator.scad>
 
-// layer height: 0.2 mm
-
-magnet_h=10;
-magnet_d=6;
+magnet_h=12;
+magnet_d=12;
 
 screw=3; // M3 screw
-use_screws=0; // in plastic holders
+use_screws=0; // 0-disable screws, 1-enable screws
 screw_plastic=2.2; // plastic hole dia
 screw_plastic_tight=screw_plastic*0.82; // tight
 // echo(screw_plastic_tight);
@@ -15,13 +13,13 @@ screw_plastic_head=screw_plastic*2.2;
 screw_plastic_transition=1.5; // cone for easier printing
 screw_plastic_under=3; // not counting transition
 
-clr_magnet_d=0.25; // diameter clearance
-clr_magnet_h=0.15; // length clearance
+clr_magnet_d=0.5; // diameter clearance
+clr_magnet_h=0.2; // length clearance
 clr_screw_hole=0.2; // hole bit bigger
 clr_screw_step=1; // screw spacing clearance
 
 tube_wall=1.5; // wall thickness
-tube_len=60; // tube length
+tube_len=130; // tube length (120 works)
 
 
 screw_step=magnet_h+screw+clr_screw_step;
@@ -31,29 +29,32 @@ screw_step=magnet_h+screw+clr_screw_step;
 cylinder_faces=32;
 
 holder_depth=15;
-// holder_width=60; // obsolete, calculated from magnet_last and screw size
-holder_height=8;
-holder_thinner=0.5; // factor to make holder bars thinner
-magnet_first=[16,12]; // head,tail
-magnet_last=magnet_first;
-magnet_n=[1,1]; // head,tail
-magnet_height=holder_height/2; // in the middle of the holder
+// holder_width=72; // should be calculated from magnet_last and screw size
+holder_height=15;
+holder_thinner=0.35; // factor that makes middle bar thinner
+magnet_first=[30,25]; // tail,head
+magnet_last=magnet_first; // tail,head
+magnet_n=[1,1]; // tail,head
+// magnet_step=5; // obsolete
+magnet_height=holder_height/2;
 holder_clearance=use_screws > 0.5 ? 0.3 : 0;
 
 // head
-head_len=12;
-inlet_h=4;
-head_inlet_clr=0.05; // head inlet clearance
+
+head_len=18;
+inlet_h=5;
+head_inlet_clr=0.1; // head inlet clearance
 head_transition=0.5; // easier printing
 tiph=-2; // from tip to cutoff inside cone
-head_tip=3; // tip diameter
+head_tip=4; // tip diameter
 
 // tail
-tail_inlet_clr=0.0; // tail inlet clearance
+
+tail_inlet_clr=0.15; // inlet clearance
 wings=4;
-wing_h1=5; // straignt height of the wing
-wing_h2=16; // total wing height
-wing_width=7;
+wing_h1=10; // straignt height of the wing
+wing_h2=30; // total wing height
+wing_width=12;
 wing_thick=tube_wall/2; // thickness
 tail_transition=2;
 holder_bar_h=4;
@@ -62,14 +63,14 @@ holder_bar_h=4;
 stop_d=magnet_d-2*clr_magnet_d; // small d
 stop_h=1.5;
 
-levitation_h=27;
+levitation_h=42;
 
 // moon artwork
-moon_d1=2*levitation_h;
-moon_d2=moon_d1;
-moon_crescent=5; // width of crescent moon
-moon_thick=7; // extrusion thickness
-moon_angle=12;
+moon_d1=levitation_h*2;
+moon_d2=levitation_h*2;
+moon_crescent=10;
+moon_thick=8;
+moon_angle=9;
 
 if(0)
   head();
@@ -92,7 +93,7 @@ difference()
     // tail();
     full_assembly();
     if(1)
-    translate([magnet_d,0,0])
-    cube([magnet_d*2,tube_len,magnet_d*2],center=true);
+    translate([100,0,0])
+    cube([200,tube_len,magnet_d*2],center=true);
 }
 

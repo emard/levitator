@@ -31,6 +31,7 @@ cylinder_faces=32;
 holder_depth=15;
 // holder_width=72; // should be calculated from magnet_last and screw size
 holder_height=14;
+holder_thinner=0.5; // factor that makes middle bar thinner
 magnet_first=[25,20]; // tail,head
 magnet_last=magnet_first; // tail,head
 magnet_n=[1,1]; // tail,head
