@@ -103,7 +103,7 @@ module magnet_holder(upper=1,lower=1,magnet=0,first=20,last=30,n=2)
   {
     union()
     {
-      cube([holder_width,holder_depth,use_screws > 0.5 ? holder_height : holder_height/2],center=true);
+      cube([holder_width,holder_depth,use_screws > 0.5 ? holder_height : holder_height*holder_thinner],center=true);
       // round corners and center round
       for(i=[-1:1:1])
         translate([i*last,0,0])
