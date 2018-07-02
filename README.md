@@ -3,7 +3,7 @@
 Object that horizonally levitates, artwork inspired
 by flying a rocket to the Moon and back.
 
-Magnets counter the gravity and a provide forward
+Magnets counter the gravity and provide forward
 horizontal force (thrust) that is compensated
 with a thread (rocket is anchored to the Moon).
 
