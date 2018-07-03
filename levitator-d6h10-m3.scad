@@ -43,13 +43,13 @@ holder_clearance=use_screws > 0.5 ? 0.3 : 0;
 // head
 head_len=12;
 inlet_h=4;
-head_inlet_clr=0.05; // head inlet clearance
+head_inlet_clr=-0.08; // head inlet clearance (positve=loose, negative=tight)
 head_transition=0.5; // easier printing
 tiph=-2; // from tip to cutoff inside cone
 head_tip=3; // tip diameter
 
 // tail
-tail_inlet_clr=0.0; // tail inlet clearance
+tail_inlet_clr=-0.08; // tail inlet clearance (positive=loose, negative=tight)
 wings=4;
 wing_h1=5; // straignt height of the wing
 wing_h2=16; // total wing height
