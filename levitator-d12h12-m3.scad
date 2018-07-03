@@ -19,7 +19,7 @@ clr_screw_hole=0.2; // hole bit bigger
 clr_screw_step=1; // screw spacing clearance
 
 tube_wall=1.5; // wall thickness
-tube_len=130; // tube length (120 works)
+tube_len=120; // tube length (120 works)
 
 
 screw_step=magnet_h+screw+clr_screw_step;
@@ -32,8 +32,8 @@ holder_depth=15;
 // holder_width=72; // should be calculated from magnet_last and screw size
 holder_height=15;
 holder_thinner=0.35; // factor that makes middle bar thinner
-magnet_first=[30,25]; // tail,head
-magnet_last=magnet_first; // tail,head
+magnet_first=[25,23]; // head,tail (25, 22-23)
+magnet_last=magnet_first; // head,tail
 magnet_n=[1,1]; // tail,head
 // magnet_step=5; // obsolete
 magnet_height=holder_height/2;
@@ -63,7 +63,7 @@ holder_bar_h=4;
 stop_d=magnet_d-2*clr_magnet_d; // small d
 stop_h=1.5;
 
-levitation_h=42;
+levitation_h=37;
 
 // moon artwork
 moon_d1=levitation_h*2;
@@ -78,13 +78,13 @@ if(0)
   rocket_tube();
 if(0)
   tail();
-if(0)
+if(1)
   printable_holders();
 if(0)
   moon();
 
 // cross section
-if(1)
+if(0)
     // translate([0,0,55])
 difference()
 {
