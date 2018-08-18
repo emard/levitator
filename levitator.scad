@@ -368,6 +368,9 @@ module full_assembly()
     translate([0,moon_d1/2-levitation_h,-90])
     rotate([0,-90,0])
     moon();
+    
+    translate([0,holder_height/2-levitation_h,-tube_len/2-inlet_h-magnet_h])
+      stand();
   }
 }
 
@@ -380,6 +383,31 @@ module full_holders()
     rotate([90,0,0])
       magnet_holder(upper=1,lower=1,magnet=0,first=magnet_first[1],last=magnet_last[1],n=magnet_n[1]);  
   echo("pause holders at", holder_depth-(holder_depth-magnet_h-clr_magnet_h)/2);
+}
+
+// for setting levitator at angle
+module stand()
+{
+  difference()
+  {
+  union()
+  {
+  // main bar
+  translate([0,-stand_length/2,0])
+    cube([stand_thickness,stand_length,stand_width], center=true);
+  // threaded rod holder
+  rotate([0,90,0])
+  rotate([0,90,0])
+    cylinder(d=stand_d,h=stand_width,$fn=32,center=true);
+  //  floor tand
+  translate([0,-stand_length,0])
+  rotate([0,90,0])
+    rotate([0,0,30])
+    cylinder(d=stand_foot_d*2/sqrt(3),h=stand_foot_length,$fn=6,center=true);
+  }
+    // threaded rod hole
+    cylinder(d=screw+clr_screw_hole,h=stand_width+0.01,$fn=6,center=true);
+  }
 }
 
 // lay 2 holders side-by-side for printing
