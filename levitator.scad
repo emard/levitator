@@ -210,10 +210,11 @@ module head()
   inner_d=magnet_d+clr_magnet_d;
   outer_d=inner_d+tube_wall;
 
-
   translate([0,0,head_len/2])
   union()
   {
+    translate([0,0,-head_len/2])
+    stopper();
   difference()
   {
     union()
@@ -224,10 +225,18 @@ module head()
         sphere(d=head_tip,$fn=cylinder_faces);
     }
     // cut out inside
-      //head_angle=asin(outer_d/2/head_len);
-      //movez=tube_wall/tan(head_angle);
-    translate([0,0,-tiph/2])
-      cylinder(d1=inner_d-head_inlet_clr-tube_wall,d2=0,h=head_len-tiph+0.01,$fn=cylinder_faces,center=true);
+    // head_angle=asin(outer_d/2/head_len);
+    // cone_wall=tube_wall*tan(head_angle);
+    if(inlet_h > 0)
+      translate([0,0,-tiph/2])
+        cylinder(d1=inner_d-head_inlet_clr-tube_wall,d2=0,h=head_len-tiph+0.01,$fn=cylinder_faces,center=true);
+    else
+    {
+      translate([0,0,tiph/2])
+        cylinder(d1=outer_d-head_inlet_clr-tube_wall/2,d2=head_tip-tube_wall,h=head_len-tiph+0.01,$fn=cylinder_faces,center=true);
+      translate([0,0,head_len/2])
+        sphere(d=head_tip-tube_wall,$fn=cylinder_faces);
+    }
   }
     // inlet, magnet diameter
       translate([0,0,-head_len/2-inlet_h/2])
@@ -260,7 +269,7 @@ module tail()
   // determine eclosing cone r, h
   r=(h1*r2-h2*r1)/(h1-h2);
   h=r*h1/(r-r1);
-  echo(r,h);
+  // echo(r,h);
 
   // inside part
     // inlet, magnet diameter
@@ -319,6 +328,16 @@ module tail()
     }
 }
 
+module full_rocket()
+{
+    translate([0,0,-tube_len/2])
+      tail();
+    rocket_tube();
+    translate([0,0,tube_len/2])
+      head();
+    echo("pause rocket at", wing_h2+magnet_h, wing_h2+tube_len-clr_magnet_h);
+}
+
 module full_assembly()
 {
   rotate([90,0,0])
@@ -350,6 +369,17 @@ module full_assembly()
     rotate([0,-90,0])
     moon();
   }
+}
+
+module full_holders()
+{
+  translate([0,holder_depth,0])
+    rotate([90,0,0])
+      magnet_holder(upper=1,lower=1,magnet=0,first=magnet_first[0],last=magnet_last[0],n=magnet_n[0]);
+  translate([0,-holder_depth,0])
+    rotate([90,0,0])
+      magnet_holder(upper=1,lower=1,magnet=0,first=magnet_first[1],last=magnet_last[1],n=magnet_n[1]);  
+  echo("pause holders at", holder_depth-(holder_depth-magnet_h-clr_magnet_h)/2);
 }
 
 // lay 2 holders side-by-side for printing
