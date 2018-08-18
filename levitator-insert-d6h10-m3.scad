@@ -43,6 +43,14 @@ magnet_n=[1,1]; // head,tail
 magnet_height=holder_height/2; // in the middle of the holder
 holder_clearance=use_screws > 0.5 ? 0.3 : 0;
 
+// stand
+stand_d=7; // at threaded rod
+stand_length=50;
+stand_width=6;
+stand_thickness=5;
+stand_foot_length=50;
+stand_foot_d=6; // at floor
+
 // head
 head_len=12;
 inlet_h=0;
@@ -79,7 +87,8 @@ if(0)
   full_rocket();
 if(0)
   full_holders();
-
+if(0)
+  stand();
 if(0)
   moon();
 
