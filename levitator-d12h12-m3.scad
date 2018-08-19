@@ -43,7 +43,7 @@ holder_clearance=use_screws > 0.5 ? 0.3 : 0;
 
 head_len=18;
 inlet_h=5;
-head_inlet_clr=0.1; // head inlet clearance
+head_inlet_clr=0.15; // head inlet clearance
 head_transition=0.5; // easier printing
 tiph=-2; // from tip to cutoff inside cone
 head_tip=4; // tip diameter
@@ -72,13 +72,13 @@ moon_crescent=10;
 moon_thick=8;
 moon_angle=9;
 
-if(0)
+if(1)
   head();
 if(0)
   rocket_tube();
 if(0)
   tail();
-if(1)
+if(0)
   printable_holders();
 if(0)
   moon();
