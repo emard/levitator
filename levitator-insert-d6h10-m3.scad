@@ -1,6 +1,16 @@
 include <levitator.scad>
 
 /* printing rocket and holders as one piece, pausing printer to insert magnets
+example for the pause at Z=21.2 mm
+
+;BEFORE_LAYER_CHANGE
+;21.2
+
+M601; Long Pause
+M300; Beep
+M1; Wait for knob press
+M602; Resume from Long Pause
+
 */
 
 // layer height: 0.2 mm
