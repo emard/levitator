@@ -1,10 +1,11 @@
 include <levitator.scad>
 
 /* printing rocket and holders as one piece, pausing printer to insert magnets
-example for the pause at Z=21.2 mm
+program will print pause at about 26 and 75 mm
+edit gcode, example:
 
 ;BEFORE_LAYER_CHANGE
-;21.2
+;26
 
 M601; Long Pause
 M300; Beep
