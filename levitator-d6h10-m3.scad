@@ -1,6 +1,36 @@
 include <levitator.scad>
 
-// layer height: 0.2 mm
+/*
+Slic3r-prusa
+
+Print Settings:
+layer height: 0.2 mm
+
+Vertical sheels:
+Perimeters: 1
+Spiral vase: [x]
+
+Output options:
+Sequential individual objects [x]
+Extruder clearance: Radius: 40 mm  Height: 40 mm
+
+Advanced:
+Seam: Rear
+[ ] External perimeters first
+
+Printer Settings:
+Extruder:
+Retraction:
+Length: 2.5 mm
+Lift Z: 0.1 mm
+
+Advanced
+Use relative E distances: [ ]
+Use firmware retraction:  [ ]
+Use volumetric E:         [ ]
+Enable variable layer
+height feature:           [x]
+*/
 
 magnet_h=10;
 magnet_d=6;
@@ -15,7 +45,7 @@ screw_plastic_head=screw_plastic*2.2;
 screw_plastic_transition=1.5; // cone for easier printing
 screw_plastic_under=3; // not counting transition
 
-clr_magnet_d=0.5; // diameter clearance
+clr_magnet_d=0.25; // diameter clearance
 clr_magnet_h=0.4; // length clearance
 clr_screw_hole=0.3; // hole bit bigger
 clr_screw_step=1; // screw spacing clearance
@@ -40,16 +70,24 @@ magnet_n=[1,1]; // head,tail
 magnet_height=holder_height/2; // in the middle of the holder
 holder_clearance=use_screws > 0.5 ? 0.3 : 0;
 
+// stand
+stand_d=7; // at threaded rod
+stand_length=50;
+stand_width=6;
+stand_thickness=5;
+stand_foot_length=50;
+stand_foot_d=6; // at floor
+
 // head
 head_len=12;
 inlet_h=4;
-head_inlet_clr=-0.08; // head inlet clearance (positve=loose, negative=tight)
+head_inlet_clr=0.20; // head inlet clearance (positve=loose, negative=tight)
 head_transition=0.5; // easier printing
 tiph=-2; // from tip to cutoff inside cone
 head_tip=3; // tip diameter
 
 // tail
-tail_inlet_clr=-0.08; // tail inlet clearance (positive=loose, negative=tight)
+tail_inlet_clr=0.15; // tail inlet clearance (positive=loose, negative=tight)
 wings=4;
 wing_h1=5; // straignt height of the wing
 wing_h2=16; // total wing height
@@ -71,19 +109,23 @@ moon_crescent=5; // width of crescent moon
 moon_thick=7; // extrusion thickness
 moon_angle=12;
 
-if(0)
+// ROCKET
+if(0) // spiral vase seam rear
   head();
-if(0)
-  rocket_tube();
-if(0)
+if(0) // spiral vase seam rear
   tail();
-if(1)
+if(0) // spiral vase seam rear
+  rocket_tube();
+// STATOR
+if(0)
   printable_holders();
+if(0)
+  stand();
 if(0)
   moon();
 
 // cross section
-if(0)
+if(1)
     // translate([0,0,55])
 difference()
 {
