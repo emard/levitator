@@ -15,9 +15,9 @@ screw_plastic_head=screw_plastic*2.2;
 screw_plastic_transition=1.5; // cone for easier printing
 screw_plastic_under=3; // not counting transition
 
-clr_magnet_d=0.25; // diameter clearance
-clr_magnet_h=0.15; // length clearance
-clr_screw_hole=0.2; // hole bit bigger
+clr_magnet_d=0.5; // diameter clearance
+clr_magnet_h=0.4; // length clearance
+clr_screw_hole=0.3; // hole bit bigger
 clr_screw_step=1; // screw spacing clearance
 
 tube_wall=1.5; // wall thickness
@@ -77,13 +77,13 @@ if(0)
   rocket_tube();
 if(0)
   tail();
-if(0)
+if(1)
   printable_holders();
 if(0)
   moon();
 
 // cross section
-if(1)
+if(0)
     // translate([0,0,55])
 difference()
 {
