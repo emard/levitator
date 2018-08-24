@@ -1,8 +1,7 @@
 include <levitator.scad>
 
 /* printing rocket and holders as one piece, pausing printer to insert magnets
-program will print pause at about 26 and 75 mm
-edit gcode, example:
+example for the pause at Z = 27.0 and 75.3 mm
 
 ;BEFORE_LAYER_CHANGE
 ;26
@@ -14,7 +13,7 @@ M602; Resume from Long Pause
 
 */
 
-// layer height: 0.2 mm
+// layer height: 0.3 mm
 
 magnet_h=10;
 magnet_d=6;
@@ -29,8 +28,8 @@ screw_plastic_head=screw_plastic*2.2;
 screw_plastic_transition=1.5; // cone for easier printing
 screw_plastic_under=3; // not counting transition
 
-clr_magnet_d=0.25; // diameter clearance
-clr_magnet_h=1.0; // length clearance
+clr_magnet_d=0.5; // diameter clearance
+clr_magnet_h=2.0; // length clearance
 clr_screw_hole=0.2; // hole bit bigger
 clr_screw_step=1; // screw spacing clearance
 
@@ -48,7 +47,7 @@ holder_depth=15;
 // holder_width=60; // obsolete, calculated from magnet_last and screw size
 holder_height=8;
 holder_thinner=0.5; // factor to make holder bars thinner
-magnet_first=[16,12]; // head,tail
+magnet_first=[16,13]; // head,tail
 magnet_last=magnet_first;
 magnet_n=[1,1]; // head,tail
 magnet_height=holder_height/2; // in the middle of the holder
