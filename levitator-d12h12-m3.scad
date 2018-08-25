@@ -1,5 +1,37 @@
 include <levitator.scad>
 
+/*
+Slic3r-prusa
+
+Print Settings:
+layer height: 0.2 mm
+
+Vertical sheels:
+Perimeters: 1
+Spiral vase: [x]
+
+Output options:
+Sequential individual objects [x]
+Extruder clearance: Radius: 40 mm  Height: 40 mm
+
+Advanced:
+Seam: Rear
+[ ] External perimeters first
+
+Printer Settings:
+Extruder:
+Retraction:
+Length: 2.5 mm
+Lift Z: 0.1 mm
+
+Advanced
+Use relative E distances: [ ]
+Use firmware retraction:  [ ]
+Use volumetric E:         [ ]
+Enable variable layer
+height feature:           [x]
+*/
+
 magnet_h=12;
 magnet_d=12;
 
@@ -14,8 +46,8 @@ screw_plastic_transition=1.5; // cone for easier printing
 screw_plastic_under=3; // not counting transition
 
 clr_magnet_d=0.5; // diameter clearance
-clr_magnet_h=0.2; // length clearance
-clr_screw_hole=0.2; // hole bit bigger
+clr_magnet_h=0.4; // length clearance
+clr_screw_hole=0.3; // hole bit bigger
 clr_screw_step=1; // screw spacing clearance
 
 tube_wall=1.5; // wall thickness
@@ -38,6 +70,14 @@ magnet_n=[1,1]; // tail,head
 // magnet_step=5; // obsolete
 magnet_height=holder_height/2;
 holder_clearance=use_screws > 0.5 ? 0.3 : 0;
+
+// stand
+stand_d=10; // at threaded rod
+stand_length=70;
+stand_width=8;
+stand_thickness=5;
+stand_foot_length=70;
+stand_foot_d=stand_width; // at floor
 
 // head
 
@@ -72,19 +112,23 @@ moon_crescent=10;
 moon_thick=8;
 moon_angle=9;
 
-if(1)
-  head();
+// Rocket (spiral vase)
 if(0)
-  rocket_tube();
+  head();
 if(0)
   tail();
 if(0)
+  rocket_tube();
+// Stator (normal slicing)
+if(0)
   printable_holders();
+if(0)
+  stand();
 if(0)
   moon();
 
 // cross section
-if(0)
+if(1)
     // translate([0,0,55])
 difference()
 {
@@ -93,7 +137,7 @@ difference()
     // tail();
     full_assembly();
     if(1)
-    translate([100,0,0])
-    cube([200,tube_len,magnet_d*2],center=true);
+    translate([magnet_d,0,0])
+    cube([magnet_d*2,tube_len,magnet_d*2],center=true);
 }
 
