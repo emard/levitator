@@ -4,11 +4,11 @@ include <levitator.scad>
 Slic3r-prusa
 
 Print Settings:
-layer height: 0.2 mm
+layer height: 0.3 mm
 
 Vertical sheels:
 Perimeters: 1
-Spiral vase: [x]
+Spiral vase: [ ]
 
 Output options:
 Sequential individual objects [x]
@@ -100,7 +100,7 @@ holder_bar_h=4;
 stop_d=magnet_d-2*clr_magnet_d; // small d
 stop_h=1.5;
 
-levitation_h=20;
+levitation_h=21;
 
 // moon artwork
 moon_d1=2*levitation_h;
