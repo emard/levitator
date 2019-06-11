@@ -64,7 +64,7 @@ holder_depth=15;
 // holder_width=60; // obsolete, calculated from magnet_last and screw size
 holder_height=8;
 holder_thinner=0.5; // factor to make holder bars thinner
-magnet_first=[16,12]; // head,tail
+magnet_first=[16,14]; // head,tail
 magnet_last=magnet_first;
 magnet_n=[1,1]; // head,tail
 magnet_height=holder_height/2; // in the middle of the holder
@@ -100,7 +100,7 @@ holder_bar_h=4;
 stop_d=magnet_d-2*clr_magnet_d; // small d
 stop_h=1.5;
 
-levitation_h=27;
+levitation_h=23;
 
 // moon artwork
 moon_d1=2*levitation_h;
@@ -121,11 +121,11 @@ if(0)
   printable_holders();
 if(0)
   stand();
-if(0)
+if(1)
   moon();
 
 // cross section
-if(1)
+if(0)
     // translate([0,0,55])
 difference()
 {
