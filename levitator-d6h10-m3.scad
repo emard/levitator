@@ -100,7 +100,7 @@ holder_bar_h=4;
 stop_d=magnet_d-2*clr_magnet_d; // small d
 stop_h=1.5;
 
-levitation_h=23;
+levitation_h=20;
 
 // moon artwork
 moon_d1=2*levitation_h;
@@ -121,11 +121,11 @@ if(0)
   printable_holders();
 if(0)
   stand();
-if(1)
+if(0)
   moon();
 
 // cross section
-if(0)
+if(1)
     // translate([0,0,55])
 difference()
 {
