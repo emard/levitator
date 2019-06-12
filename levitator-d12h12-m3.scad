@@ -4,11 +4,11 @@ include <levitator.scad>
 Slic3r-prusa
 
 Print Settings:
-layer height: 0.2 mm
+layer height: 0.3 mm
 
 Vertical sheels:
 Perimeters: 1
-Spiral vase: [x]
+Spiral vase: [ ]
 
 Output options:
 Sequential individual objects [x]
@@ -47,7 +47,7 @@ screw_plastic_under=3; // not counting transition
 
 clr_magnet_d=0.5; // diameter clearance
 clr_magnet_h=0.4; // length clearance
-clr_screw_hole=0.3; // hole bit bigger
+clr_screw_hole=0.25; // hole bit bigger
 clr_screw_step=1; // screw spacing clearance
 
 tube_wall=1.5; // wall thickness
