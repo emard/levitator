@@ -15,7 +15,7 @@ Sequential individual objects [x]
 Extruder clearance: Radius: 40 mm  Height: 40 mm
 
 Advanced:
-Seam: Rear
+Seam: Nearest
 [ ] External perimeters first
 
 Printer Settings:
