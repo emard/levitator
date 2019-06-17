@@ -15,7 +15,7 @@ Sequential individual objects [x]
 Extruder clearance: Radius: 40 mm  Height: 40 mm
 
 Advanced:
-Seam: Rear
+Seam: Nearest
 [ ] External perimeters first
 
 Printer Settings:
@@ -51,7 +51,7 @@ clr_screw_hole=0.25; // hole bit bigger
 clr_screw_step=1; // screw spacing clearance
 
 tube_wall=1.5; // wall thickness
-tube_len=120; // tube length (120 works)
+tube_len=100; // tube length
 
 
 screw_step=magnet_h+screw+clr_screw_step;
