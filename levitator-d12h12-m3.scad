@@ -111,6 +111,7 @@ moon_d2=levitation_h*2;
 moon_crescent=10;
 moon_thick=8;
 moon_angle=9;
+moon_clr_screw_hole=0.2; // must be tight enough
 
 // Rocket (spiral vase)
 if(0)

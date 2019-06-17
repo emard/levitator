@@ -24,7 +24,7 @@ module moon()
     translate([0,-moon_d1/2+magnet_height,0])
       rotate([90,0,90])
       rotate([0,0,90])
-      cylinder(d=screw+clr_screw_hole,h=moon_d1*2,$fn=6,center=true);
+      cylinder(d=screw+moon_clr_screw_hole,h=moon_d1*2,$fn=6,center=true);
 
 
   }

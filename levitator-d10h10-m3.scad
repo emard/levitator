@@ -71,6 +71,7 @@ moon_d2=78;
 moon_crescent=10;
 moon_thick=8;
 moon_angle=9;
+moon_clr_screw_hole=0.2; // hole bit bigger
 
 if(0)
   head();
