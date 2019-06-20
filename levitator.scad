@@ -357,11 +357,11 @@ module full_assembly()
     translate([0,0,tube_len/2])
       head();
 
-    translate([0,holder_height/2-levitation_h,tube_len/2-inlet_h-magnet_h])
+    translate([0,holder_height/2-levitation_h,tube_len/2-inlet_h-1.5*magnet_h])
       rotate([-90,0,0]) // magnet=1
         magnet_holder(upper=0,lower=1,magnet=1,first=magnet_first[0],last=magnet_last[0],n=magnet_n[0]);
 
-    translate([0,holder_height/2-levitation_h,-tube_len/2+inlet_h+magnet_h/2])
+    translate([0,holder_height/2-levitation_h,-tube_len/2+inlet_h-0*magnet_h/2])
       rotate([-90,0,0]) // magnet=2
         magnet_holder(upper=1,lower=0,magnet=2,first=magnet_first[1],last=magnet_last[1],n=magnet_n[1]);
     
