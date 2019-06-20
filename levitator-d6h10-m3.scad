@@ -11,7 +11,7 @@ Perimeters: 1
 Spiral vase: [ ]
 
 Horizontal shells:
-Solid layes: top: 1  bottom: 1
+Solid layers: top: 1  bottom: 1
 
 Infill: 10%
 
