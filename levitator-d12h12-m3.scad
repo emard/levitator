@@ -7,8 +7,13 @@ Print Settings:
 layer height: 0.3 mm
 
 Vertical sheels:
-Perimeters: 1
+Perimeters: 2
 Spiral vase: [ ]
+
+Horizontal shells:
+Solid layes: top: 2  bottom: 1
+
+Infill: 10%
 
 Output options:
 Sequential individual objects [x]
@@ -83,14 +88,14 @@ stand_foot_d=stand_width; // at floor
 
 head_len=18;
 inlet_h=5;
-head_inlet_clr=0.15; // head inlet clearance
+head_inlet_clr=0.14; // head inlet clearance
 head_transition=0.5; // easier printing
 tiph=-2; // from tip to cutoff inside cone
 head_tip=4; // tip diameter
 
 // tail
 
-tail_inlet_clr=0.15; // inlet clearance
+tail_inlet_clr=0.14; // inlet clearance
 wings=4;
 wing_h1=10; // straignt height of the wing
 wing_h2=30; // total wing height

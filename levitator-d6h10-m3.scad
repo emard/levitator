@@ -10,6 +10,11 @@ Vertical sheels:
 Perimeters: 1
 Spiral vase: [ ]
 
+Horizontal shells:
+Solid layes: top: 1  bottom: 1
+
+Infill: 10%
+
 Output options:
 Sequential individual objects [x]
 Extruder clearance: Radius: 40 mm  Height: 40 mm
