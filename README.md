@@ -7,8 +7,12 @@ Magnets counter the gravity and provide forward
 horizontal force (thrust) that is compensated
 with a thread (rocket is anchored to the Moon).
 
-3D printable parts and 6 round (cylinder)
-neodymium magnets D=10 mm, L=10 mm, 0.5 T (grade N35).
+3D printable parts, M3 threaded stainless steel rod
+and 6 round (cylinder) neodymium magnets (0.5 T, grade N35).
+
+    D =  6 mm, L = 10 mm, rod 14 mm
+    D = 10 mm, L = 10 mm, rod 25 mm
+    D = 12 mm, L = 12 mm, rod 25 mm
 
 ![Image](/pic/levitator.png)
 
