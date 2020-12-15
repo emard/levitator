@@ -40,16 +40,15 @@ magnet_height=holder_height/2;
 holder_clearance=use_screws > 0.5 ? 0.3 : 0;
 
 // head
-
 head_len=15;
 inlet_h=5;
 head_inlet_clr=0.1; // head inlet clearance
 head_transition=0.5; // easier printing
 tiph=-2; // from tip to cutoff inside cone
 head_tip=4; // tip diameter
+head_tube_len=0; // head extension (like body)
 
 // tail
-
 tail_inlet_clr=0.15; // inlet clearance
 wings=4;
 wing_h1=7; // straignt height of the wing

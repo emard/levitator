@@ -209,25 +209,35 @@ module head()
 {
   inner_d=magnet_d+clr_magnet_d;
   outer_d=inner_d+tube_wall;
+  //head_tube_len=10;
 
   translate([0,0,head_len/2])
   union()
   {
     translate([0,0,-head_len/2])
     stopper();
+  // the extended body
+  translate([0,0,-head_len/2+head_tube_len/2])
+  difference()
+  {
+    cylinder(d=outer_d,h=head_tube_len,$fn=cylinder_faces,center=true);
+    cylinder(d=inner_d,h=head_tube_len+0.01,$fn=cylinder_faces,center=true);
+  }
+  // the head
+  translate([0,0,head_tube_len])
   difference()
   {
     union()
     {
-    cylinder(d1=outer_d,d2=head_tip,h=head_len,  $fn=cylinder_faces,center=true);
-        // sphere at the tip
-        translate([0,0,head_len/2])
+      cylinder(d1=outer_d,d2=head_tip,h=head_len,$fn=cylinder_faces,center=true);
+      // sphere at the tip
+      translate([0,0,head_len/2])
         sphere(d=head_tip,$fn=cylinder_faces);
     }
     // cut out inside
     // head_angle=asin(outer_d/2/head_len);
     // cone_wall=tube_wall*tan(head_angle);
-    if(inlet_h > 0)
+    if(inlet_h > 0 && head_tube_len < 0.01)
       translate([0,0,-tiph/2])
         cylinder(d1=inner_d-head_inlet_clr-tube_wall,d2=0,h=head_len-tiph+0.01,$fn=cylinder_faces,center=true);
     else

@@ -90,6 +90,7 @@ head_inlet_clr=0.20; // head inlet clearance (positve=loose, negative=tight)
 head_transition=0.5; // easier printing
 tiph=-2; // from tip to cutoff inside cone
 head_tip=3; // tip diameter
+head_tube_len=0; // head extension (like body)
 
 // tail
 tail_inlet_clr=0.15; // tail inlet clearance (positive=loose, negative=tight)
