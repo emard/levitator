@@ -50,9 +50,9 @@ screw_plastic_head=screw_plastic*2.2;
 screw_plastic_transition=1.5; // cone for easier printing
 screw_plastic_under=3; // not counting transition
 
-clr_magnet_d=0.25; // diameter clearance
-clr_magnet_h=0.4; // length clearance
-clr_screw_hole=0.3; // hole bit bigger (moon clr defined on other place)
+clr_magnet_d=0.3; // diameter clearance
+clr_magnet_h=0.5; // length clearance
+clr_screw_hole=0.33; // hole bit bigger (except moon clr, defined on other place)
 clr_screw_step=1; // screw spacing clearance
 
 tube_wall=1.5; // wall thickness
