@@ -348,13 +348,14 @@ module full_rocket()
     echo("pause rocket at", wing_h2+magnet_h, wing_h2+tube_len-clr_magnet_h);
 }
 
-module full_assembly()
+module full_assembly(magnets=2)
 {
   rotate([90,0,0])
   union()
   {
     rocket_tube();
     // magnet head
+    if(magnets>1.5)
     translate([0,0,tube_len/2-magnet_h/2-inlet_h-clr_magnet_h/2])
       magnet();
     // magnet tail
@@ -367,6 +368,7 @@ module full_assembly()
     translate([0,0,tube_len/2])
       head();
 
+    if(magnets>1.5)
     translate([0,holder_height/2-levitation_h,tube_len/2-inlet_h-1.5*magnet_h])
       rotate([-90,0,0]) // magnet=1
         magnet_holder(upper=0,lower=1,magnet=1,first=magnet_first[0],last=magnet_last[0],n=magnet_n[0]);
