@@ -52,7 +52,7 @@ screw_plastic_under=3; // not counting transition
 
 clr_magnet_d=0.3; // diameter clearance
 clr_magnet_h=0.5; // length clearance
-clr_screw_hole=0.33; // hole bit bigger (except moon clr, defined on other place)
+clr_screw_hole=0.34; // hole bit bigger (except moon clr, defined on other place)
 clr_screw_step=1; // screw spacing clearance
 
 tube_wall=1.5; // wall thickness
@@ -124,7 +124,7 @@ if(0) // spiral vase seam rear
 if(0) // spiral vase seam rear
   rocket_tube();
 // STATOR
-if(0)
+if(0) // print with seam: random for each piece be equal (no seam)
   printable_holders();
 if(0)
   stand();
