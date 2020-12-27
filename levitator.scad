@@ -167,7 +167,7 @@ module magnet_holder(upper=1,lower=1,magnet=0,first=20,last=30,n=2)
       for(j=[-1:2:1])
         translate([j*(first+i*magnet_step),0,-holder_height/2+magnet_height])
           rotate([90,0,0])
-            cylinder(d=magnet_d+clr_magnet_d,h=magnet_h+clr_magnet_h,$fn=32,center=true);
+            cylinder(d=magnet_d+holder_clr_magnet_d,h=magnet_h+holder_clr_magnet_h,$fn=32,center=true);
     // rod hole
     // hole for threaded rod
     translate([0,0,-holder_height/2+magnet_height])
