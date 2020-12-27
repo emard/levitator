@@ -50,9 +50,9 @@ screw_plastic_head=screw_plastic*2.2;
 screw_plastic_transition=1.5; // cone for easier printing
 screw_plastic_under=3; // not counting transition
 
-clr_magnet_d=0.3; // diameter clearance
-clr_magnet_h=0.5; // length clearance
-clr_screw_hole=0.34; // hole bit bigger (except moon clr, defined on other place)
+clr_magnet_d=0.3; // diameter clearance (except holder)
+clr_magnet_h=0.5; // length clearance (except holder)
+clr_screw_hole=0.4; // hole bit bigger (except moon clr, defined on other place)
 clr_screw_step=1; // screw spacing clearance
 
 tube_wall=1.5; // wall thickness
@@ -69,6 +69,8 @@ holder_depth=15;
 // holder_width=60; // obsolete, calculated from magnet_last and screw size
 holder_height=8;
 holder_thinner=0.5; // factor to make holder bars thinner
+holder_clr_magnet_d=clr_magnet_d+0.2;
+holder_clr_magnet_h=clr_magnet_h;
 magnet_first=[15,15]; // head,tail
 magnet_last=magnet_first;
 magnet_n=[1,1]; // head,tail
@@ -124,7 +126,7 @@ if(0) // spiral vase seam rear
 if(0) // spiral vase seam rear
   rocket_tube();
 // STATOR
-if(0) // print with seam: random for each piece be equal (no seam)
+if(1) // print with seam: random for each piece be equal (no seam)
   printable_holders();
 if(0)
   stand();
@@ -132,7 +134,7 @@ if(0)
   moon();
 
 // cross section
-if(1)
+if(0)
     // translate([0,0,55])
 difference()
 {
