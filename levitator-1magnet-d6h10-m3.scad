@@ -56,7 +56,7 @@ clr_screw_hole=0.4; // hole bit bigger (except moon clr, defined on other place)
 clr_screw_step=1; // screw spacing clearance
 
 tube_wall=1.5; // wall thickness
-tube_len=75; // tube length
+tube_len=73; // tube length
 
 
 screw_step=magnet_h+screw+clr_screw_step;
@@ -71,7 +71,7 @@ holder_height=8;
 holder_thinner=0.5; // factor to make holder bars thinner
 holder_clr_magnet_d=clr_magnet_d+0.2;
 holder_clr_magnet_h=clr_magnet_h;
-magnet_first=[15,15]; // head,tail
+magnet_first=[14,13]; // head,tail
 magnet_last=magnet_first;
 magnet_n=[1,1]; // head,tail
 magnet_height=holder_height/2; // in the middle of the holder
@@ -126,7 +126,7 @@ if(0) // spiral vase seam rear
 if(0) // spiral vase seam rear
   rocket_tube();
 // STATOR
-if(1) // print with seam: random for each piece be equal (no seam)
+if(0) // print with seam: random for each piece be equal (no seam)
   printable_holders();
 if(0)
   stand();
@@ -134,7 +134,7 @@ if(0)
   moon();
 
 // cross section
-if(0)
+if(1)
     // translate([0,0,55])
 difference()
 {
