@@ -1,7 +1,7 @@
 include <levitator.scad>
 
 /*
-Slic3r-prusa
+slicer-prusa
 
 Print Settings:
 layer height: 0.3 mm
